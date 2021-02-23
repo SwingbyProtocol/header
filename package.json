@@ -1,0 +1,87 @@
+{
+  "name": "@swingby-protocol/header",
+  "version": "0.0.0-development",
+  "license": "MIT",
+  "module": "dist/header.esm.js",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "static.html"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "engines": {
+    "node": ">=12"
+  },
+  "scripts": {
+    "dev": "start-storybook -p 6006",
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "static": "ts-node --compiler-options '{ \"module\": \"commonjs\" }' src/static",
+    "test": "tsdx test --passWithNoTests",
+    "lint": "eslint .",
+    "size": "size-limit",
+    "analyze": "size-limit --why",
+    "format": "prettier --write '**/*.{js,jsx,ts,tsx,css,json,md,mdx,html}'"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint"
+    }
+  },
+  "size-limit": [
+    {
+      "path": "dist/header.cjs.production.min.js"
+    },
+    {
+      "path": "dist/header.esm.js"
+    }
+  ],
+  "dependencies": {},
+  "peerDependencies": {
+    "@swingby-protocol/pulsar": "^3.8.0",
+    "react": ">=16"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.1",
+    "@percy/cypress": "^2.3.4",
+    "@rollup/plugin-url": "^6.0.0",
+    "@size-limit/preset-big-lib": "^4.9.2",
+    "@storybook/addon-essentials": "^6.1.20",
+    "@storybook/addon-info": "^5.3.21",
+    "@storybook/addon-links": "^6.1.20",
+    "@storybook/addons": "^6.1.20",
+    "@storybook/react": "^6.1.20",
+    "@swingby-protocol/eslint-config": "^2.1.0",
+    "@swingby-protocol/prettier-config": "^1.0.2",
+    "@swingby-protocol/pulsar": "^3.8.2",
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.1",
+    "@types/styled-components": "^5.1.7",
+    "@typescript-eslint/eslint-plugin": "4.15.2",
+    "babel-loader": "^8.2.2",
+    "cypress": "^6.5.0",
+    "husky": "^5.1.1",
+    "polished": "^4.1.1",
+    "prettier": "^2.2.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-is": "^17.0.1",
+    "react-spring": "^8.0.27",
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-string": "^3.0.0",
+    "semantic-release": "^17.3.9",
+    "size-limit": "^4.9.2",
+    "styled-components": "^5.2.1",
+    "ts-node": "^9.1.1",
+    "tsdx": "^0.14.1",
+    "tslib": "^2.1.0",
+    "typescript": "^4.2.2"
+  },
+  "resolutions": {
+    "**/react": "17.0.1",
+    "**/@typescript-eslint/eslint-plugin": "4.15.2"
+  }
+}
