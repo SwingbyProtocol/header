@@ -4,6 +4,7 @@ import { PulsarThemeProvider, PulsarGlobalStyles } from '@swingby-protocol/pulsa
 
 import { ThemeSwitcher } from '../ThemeSwitcher';
 import { FancyButtons } from '../FancyButtons';
+import { LocaleSwitcher } from '../LocaleSwitcher';
 
 import { SwingbyHeader } from './';
 
@@ -20,7 +21,12 @@ export const Default = () => (
     <SwingbyHeader />
     <SwingbyHeader
       productName="Explorer"
-      barItems={<ThemeSwitcher theme="auto" />}
+      barItems={
+        <>
+          <ThemeSwitcher theme="auto" />
+          <LocaleSwitcher locale="zh" locales={['en', 'zh', 'zh-TW', 'ja', 'es', 'gl']} />
+        </>
+      }
       items={[
         { key: 'stake', href: 'https://skybridge.info/pool', render: 'Stake and Earn BTC' },
         { key: 'metanodes', href: 'https://skybridge.info/metanodes', render: 'Metanodes' },
