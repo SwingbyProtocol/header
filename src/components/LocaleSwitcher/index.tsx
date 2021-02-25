@@ -2,6 +2,7 @@ import React, { useMemo } from 'react';
 import { Dropdown } from '@swingby-protocol/pulsar';
 
 import { getLanguageName } from './getLanguageName';
+import { Target } from './styled';
 
 type Props = { locale: string; locales: string[]; onChange?: (locale: string) => void };
 
@@ -17,11 +18,7 @@ export const LocaleSwitcher = ({ locale, locales: localesParam, onChange }: Prop
   );
 
   return (
-    <Dropdown
-      target={
-        <Dropdown.DefaultTarget size="city">{getLanguageName(locale)}</Dropdown.DefaultTarget>
-      }
-    >
+    <Dropdown target={<Target size="city">{getLanguageName(locale)}</Target>}>
       {locales.map((it) => (
         <Dropdown.Item selected={locale === it} onClick={() => onChange?.(it)} key={it}>
           {getLanguageName(it)}

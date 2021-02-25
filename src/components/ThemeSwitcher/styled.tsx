@@ -6,4 +6,5 @@ export const Container = styled.button`
   padding: 0;
   font-size: 1em;
   cursor: pointer;
+  color: ${({ theme }) => theme.pulsar.color.text.normal};
 `;
