@@ -15,8 +15,8 @@ const meta: Meta = {
 
 export default meta;
 
-export const Default = () => (
-  <PulsarThemeProvider theme="light">
+const Common = () => (
+  <>
     <PulsarGlobalStyles />
     <SwingbyHeader />
     <SwingbyHeader
@@ -35,5 +35,17 @@ export const Default = () => (
     />
     <SwingbyHeader barItems={<ThemeSwitcher theme="light" />} />
     <SwingbyHeader barItems={<ThemeSwitcher theme="dark" />} />
+  </>
+);
+
+export const Light = () => (
+  <PulsarThemeProvider theme="light">
+    <Common />
+  </PulsarThemeProvider>
+);
+
+export const Dark = () => (
+  <PulsarThemeProvider theme="dark">
+    <Common />
   </PulsarThemeProvider>
 );
