@@ -21,6 +21,7 @@ const Common = () => (
     <SwingbyHeader />
     <SwingbyHeader
       productName="Explorer"
+      logoHref="/"
       barItems={
         <>
           <ThemeSwitcher theme="auto" />

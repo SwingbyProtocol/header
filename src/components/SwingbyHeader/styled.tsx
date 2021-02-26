@@ -24,6 +24,14 @@ export const HeaderContainer = styled.div`
   }
 `;
 
+export const AppLogoLink = styled.a`
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 export const StyledAppLogo = styled(AppLogo)`
   grid-area: logo;
   font-size: ${({ theme }) => rem(theme.pulsar.size.street)};

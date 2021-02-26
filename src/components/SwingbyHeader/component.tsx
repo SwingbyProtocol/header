@@ -6,6 +6,7 @@ import { FancyButtons } from '../FancyButtons';
 import { MenuItem } from './MenuItem';
 import {
   HeaderContainer,
+  AppLogoLink,
   StyledAppLogo,
   BarItemsContainer,
   MenuToggleContainer,
@@ -16,6 +17,7 @@ import {
 
 type Props = {
   productName?: string;
+  logoHref?: string;
   barItems?: React.ReactNode;
   items?: Array<
     { render: React.ReactNode; key: string } & Pick<
@@ -43,10 +45,16 @@ const DEFAULT_ITEMS: Props['items'] = [
   { render: <FancyButtons />, key: 'telegram-and-explorer' },
 ];
 
-export const Component = ({ productName, barItems, items = DEFAULT_ITEMS }: Props) => {
+export const Component = ({ logoHref, productName, barItems, items = DEFAULT_ITEMS }: Props) => {
   return (
     <HeaderContainer>
-      <StyledAppLogo productName={productName} data-testid="sb.header.logo" />
+      {logoHref ? (
+        <AppLogoLink href={logoHref}>
+          <StyledAppLogo productName={productName} data-testid="sb.header.logo" />
+        </AppLogoLink>
+      ) : (
+        <StyledAppLogo productName={productName} data-testid="sb.header.logo" />
+      )}
       {!!barItems && (
         <BarItemsContainer data-testid="sb.header.bar-items">{barItems}</BarItemsContainer>
       )}
