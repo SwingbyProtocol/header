@@ -36,6 +36,8 @@ const Common = () => (
     />
     <SwingbyHeader barItems={<ThemeSwitcher theme="light" />} />
     <SwingbyHeader barItems={<ThemeSwitcher theme="dark" />} />
+    <SwingbyHeader barItems={<ThemeSwitcher theme="dark" />} items={null} />
+    <SwingbyHeader barItems={<ThemeSwitcher theme="dark" />} items={[]} />
   </>
 );
 

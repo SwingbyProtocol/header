@@ -41,6 +41,7 @@ export const BarItemsContainer = styled.div`
   grid-area: bar-items;
   display: flex;
   flex-direction: row;
+  margin-right: ${({ theme }) => rem(-theme.pulsar.size.closet)};
 
   > * {
     margin-right: ${({ theme }) => rem(theme.pulsar.size.closet)};
@@ -50,6 +51,7 @@ export const BarItemsContainer = styled.div`
 export const MenuToggleContainer = styled.label`
   grid-area: menu;
   cursor: pointer;
+  margin-left: ${({ theme }) => rem(theme.pulsar.size.closet)};
 
   @media ${bigEnough} {
     display: none;
@@ -95,6 +97,7 @@ export const MenuContainer = styled.ol`
     display: flex;
     flex-direction: row;
     border: none;
+    margin-left: ${({ theme }) => rem(theme.pulsar.size.street)};
 
     > :not(:last-child) {
       margin-right: ${({ theme }) => rem(theme.pulsar.size.street)};

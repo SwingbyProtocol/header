@@ -24,7 +24,7 @@ type Props = {
       React.ComponentPropsWithoutRef<typeof MenuItem>,
       'onClick' | 'target' | 'href'
     >
-  >;
+  > | null;
 };
 
 const TOGGLE_ID = 'sb-header-menu-toggle';
@@ -58,23 +58,27 @@ export const Component = ({ logoHref, productName, barItems, items = DEFAULT_ITE
       {!!barItems && (
         <BarItemsContainer data-testid="sb.header.bar-items">{barItems}</BarItemsContainer>
       )}
-      <MenuToggleInput type="checkbox" id={TOGGLE_ID} />
-      <MenuToggleContainer htmlFor={TOGGLE_ID} data-testid="sb.header.toggle">
-        <Icon.Hamburger />
-      </MenuToggleContainer>
-      <MenuContainer>
-        {items.map((it) => (
-          <MenuItem
-            key={it.key}
-            href={it.href}
-            target={it.target}
-            onClick={it.onClick}
-            data-testid={`sb.header.items.${it.key}`}
-          >
-            {it.render}
-          </MenuItem>
-        ))}
-      </MenuContainer>
+      {!!items && items.length > 0 && (
+        <>
+          <MenuToggleInput type="checkbox" id={TOGGLE_ID} />
+          <MenuToggleContainer htmlFor={TOGGLE_ID} data-testid="sb.header.toggle">
+            <Icon.Hamburger />
+          </MenuToggleContainer>
+          <MenuContainer>
+            {items.map((it) => (
+              <MenuItem
+                key={it.key}
+                href={it.href}
+                target={it.target}
+                onClick={it.onClick}
+                data-testid={`sb.header.items.${it.key}`}
+              >
+                {it.render}
+              </MenuItem>
+            ))}
+          </MenuContainer>
+        </>
+      )}
     </HeaderContainer>
   );
 };
