@@ -5,7 +5,7 @@ import { Container, StyledTelegramButton, StyledExplorerButton } from './styled'
 
 type Props = { items?: Array<'telegram' | 'explorer'> };
 
-export const FancyButtons = ({ items = ['telegram', 'explorer'] }: Props) => {
+export const FancyButtons = ({ items = ['telegram'] }: Props) => {
   return (
     <Container>
       {items.map((it) => {

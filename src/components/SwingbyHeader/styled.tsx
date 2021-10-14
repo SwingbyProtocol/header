@@ -9,8 +9,8 @@ export const HeaderContainer = styled.div`
   display: grid;
   width: 100vw;
   background: ${({ theme }) => theme.pulsar.color.bg.normal};
-  grid-template-columns: 1fr min-content min-content 0px;
-  grid-template-areas: 'logo bar-items menu items';
+  grid-template-columns: 1fr 0px min-content min-content;
+  grid-template-areas: 'logo items bar-items menu';
   align-items: center;
   justify-items: start;
   padding: 0 ${({ theme }) => rem(theme.pulsar.size.street)};
@@ -20,7 +20,7 @@ export const HeaderContainer = styled.div`
   white-space: nowrap;
 
   @media ${bigEnough} {
-    grid-template-columns: 1fr min-content 0px min-content;
+    grid-template-columns: min-content 1fr min-content 0px;
   }
 `;
 
@@ -42,6 +42,7 @@ export const BarItemsContainer = styled.div`
   display: flex;
   flex-direction: row;
   margin-right: ${({ theme }) => rem(-theme.pulsar.size.closet)};
+  margin-left: ${({ theme }) => rem(theme.pulsar.size.street)};
 
   > * {
     margin-right: ${({ theme }) => rem(theme.pulsar.size.closet)};

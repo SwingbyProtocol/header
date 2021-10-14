@@ -1,8 +1,6 @@
 import { Icon } from '@swingby-protocol/pulsar';
 import React from 'react';
 
-import { FancyButtons } from '../FancyButtons';
-
 import { MenuItem } from './MenuItem';
 import {
   HeaderContainer,
@@ -12,7 +10,6 @@ import {
   MenuToggleContainer,
   MenuToggleInput,
   MenuContainer,
-  Tag,
 } from './styled';
 
 type Props = {
@@ -28,21 +25,10 @@ type Props = {
 };
 
 const TOGGLE_ID = 'sb-header-menu-toggle';
-const DEFAULT_ITEMS: Props['items'] = [
-  { render: 'What is Swingby?', key: 'about', href: 'https://swingby.network/about-swingby' },
-  { render: 'Run a metanode', key: 'run-metanode', href: 'https://swingby.network/metanode' },
-  { render: 'Developers', key: 'devs', href: 'https://swingby.network/developers' },
-  { render: 'Affiliate Program', key: 'affiliate', href: 'https://affiliate.swingby.network' },
-  {
-    render: (
-      <>
-        Earn&nbsp;<Tag>34.8% APR</Tag>
-      </>
-    ),
-    key: 'earn',
-    href: 'https://swingby.network/earn',
-  },
-  { render: <FancyButtons />, key: 'telegram-and-explorer' },
+export const DEFAULT_ITEMS: Props['items'] = [
+  { render: 'Liquidity', key: 'about', href: 'https://skybridge.info/pool' },
+  { render: 'Farm', key: 'run-metanode', href: 'https://farm.swingby.network' },
+  { render: 'Metanodes', key: 'devs', href: 'https://skybridge.info/metanodes' },
 ];
 
 export const Component = ({ logoHref, productName, barItems, items = DEFAULT_ITEMS }: Props) => {
@@ -55,9 +41,7 @@ export const Component = ({ logoHref, productName, barItems, items = DEFAULT_ITE
       ) : (
         <StyledAppLogo productName={productName} data-testid="sb.header.logo" />
       )}
-      {!!barItems && (
-        <BarItemsContainer data-testid="sb.header.bar-items">{barItems}</BarItemsContainer>
-      )}
+
       {!!items && items.length > 0 && (
         <>
           <MenuToggleInput type="checkbox" id={TOGGLE_ID} />
@@ -78,6 +62,10 @@ export const Component = ({ logoHref, productName, barItems, items = DEFAULT_ITE
             ))}
           </MenuContainer>
         </>
+      )}
+
+      {!!barItems && (
+        <BarItemsContainer data-testid="sb.header.bar-items">{barItems}</BarItemsContainer>
       )}
     </HeaderContainer>
   );
