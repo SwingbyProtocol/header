@@ -1,5 +1,7 @@
 import { Icon } from '@swingby-protocol/pulsar';
-import React from 'react';
+import React, { useMemo } from 'react';
+
+import { SupportedLocale, SUPPORTED_LOCALES } from '../LocaleSwitcher';
 
 import { MenuItem } from './MenuItem';
 import {
@@ -24,14 +26,55 @@ type Props = {
   > | null;
 };
 
+const getCurrentLocale = (): SupportedLocale | null => {
+  try {
+    const regExp = new RegExp(`^/(${SUPPORTED_LOCALES.join('|')})(/.*)?$`, 'i');
+    const locale = new URL(window.location.href).pathname.match(regExp)?.[1];
+    if (!locale) {
+      return null;
+    }
+
+    return SUPPORTED_LOCALES.find((it) => it.toLowerCase() === locale.toLowerCase()) ?? null;
+  } catch (e) {
+    return null;
+  }
+};
+
 const TOGGLE_ID = 'sb-header-menu-toggle';
 export const DEFAULT_ITEMS: Props['items'] = [
-  { render: 'Liquidity', key: 'about', href: 'https://skybridge.info/pool' },
-  { render: 'Farm', key: 'run-metanode', href: 'https://farm.swingby.network' },
-  { render: 'Metanodes', key: 'devs', href: 'https://skybridge.info/metanodes' },
+  { render: 'Liquidity', key: 'liquidity', href: 'https://skybridge.info/pool' },
+  { render: 'Farm', key: 'farm', href: 'https://farm.swingby.network' },
+  { render: 'Metanodes', key: 'metanodes', href: 'https://skybridge.info/metanodes' },
 ];
 
-export const Component = ({ logoHref, productName, barItems, items = DEFAULT_ITEMS }: Props) => {
+export const Component = ({
+  logoHref,
+  productName,
+  barItems,
+  items: itemsParam = DEFAULT_ITEMS,
+}: Props) => {
+  const locale = getCurrentLocale();
+  const items = useMemo((): typeof itemsParam => {
+    if (!itemsParam) return null;
+    if (!locale) return itemsParam;
+
+    return itemsParam.map((it) => {
+      if (it === DEFAULT_ITEMS[0]) {
+        return { ...it, href: `https://skybridge.info/${locale}/pool` };
+      }
+
+      if (it === DEFAULT_ITEMS[1]) {
+        return { ...it, href: `https://farm.swingby.network/${locale}` };
+      }
+
+      if (it === DEFAULT_ITEMS[2]) {
+        return { ...it, href: `https://skybridge.info/${locale}/metanodes` };
+      }
+
+      return it;
+    });
+  }, [itemsParam, locale]);
+
   return (
     <HeaderContainer>
       {logoHref ? (
