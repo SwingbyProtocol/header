@@ -24,7 +24,7 @@
       it('renders dropdown correctly', () => {
         cy.visitStory({ storyId: `swingbyheader--${theme}` });
         cy.get('[data-testid="sb.header.toggle"]').first().click();
-        cy.get('[data-testid="sb.header.items.about"]').should('be.visible');
+        cy.get('[data-testid="sb.header.items.liquidity"]').should('be.visible');
         cy.percySnapshot(`${name}: dropdown`, { widths: [width], minHeight: height });
       });
     }
