@@ -75,15 +75,23 @@ export const Component = ({
 
     return itemsParam.map((it) => {
       if (it === DEFAULT_ITEMS[0]) {
-        return { ...it, href: `https://skybridge.info/${locale}/pool` };
+        return { ...it, href: `https://skybridge.info/${locale}` };
       }
 
       if (it === DEFAULT_ITEMS[1]) {
-        return { ...it, href: `https://farm.swingby.network/${locale}` };
+        return { ...it, href: `https://skybridge.info/${locale}/pool` };
       }
 
       if (it === DEFAULT_ITEMS[2]) {
+        return { ...it, href: `https://farm.swingby.network/${locale}` };
+      }
+
+      if (it === DEFAULT_ITEMS[3]) {
         return { ...it, href: `https://skybridge.info/${locale}/metanodes` };
+      }
+
+      if (it === DEFAULT_ITEMS[4]) {
+        return { ...it, href: `https://bridge.swingby.network/${locale}` };
       }
 
       return it;
