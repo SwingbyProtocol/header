@@ -1,5 +1,5 @@
 import { Icon } from '@swingby-protocol/pulsar';
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { SupportedLocale, SUPPORTED_LOCALES } from '../LocaleSwitcher';
 
@@ -26,25 +26,13 @@ type Props = {
   > | null;
 };
 
-const getCurrentLocale = (): SupportedLocale | null => {
-  try {
-    const regExp = new RegExp(`^/(${SUPPORTED_LOCALES.join('|')})(/.*)?$`, 'i');
-    const locale = new URL(window.location.href).pathname.match(regExp)?.[1];
-    if (!locale) {
-      return null;
-    }
-
-    return SUPPORTED_LOCALES.find((it) => it.toLowerCase() === locale.toLowerCase()) ?? null;
-  } catch (e) {
-    return null;
-  }
-};
-
 const TOGGLE_ID = 'sb-header-menu-toggle';
 export const DEFAULT_ITEMS: Props['items'] = [
+  { render: 'Explorer', key: 'explorer', href: 'https://skybridge.info' },
   { render: 'Liquidity', key: 'liquidity', href: 'https://skybridge.info/pool' },
   { render: 'Farm', key: 'farm', href: 'https://farm.swingby.network' },
   { render: 'Metanodes', key: 'metanodes', href: 'https://skybridge.info/metanodes' },
+  { render: 'ERC20 Bridge', key: 'erc20-bridge', href: 'https://bridge.swingby.network' },
 ];
 
 export const Component = ({
@@ -53,7 +41,34 @@ export const Component = ({
   barItems,
   items: itemsParam = DEFAULT_ITEMS,
 }: Props) => {
-  const locale = getCurrentLocale();
+  const [href, setHref] = useState<string | null>(
+    (() => {
+      try {
+        return window.location.href;
+      } catch (e) {
+        return null;
+      }
+    })(),
+  );
+
+  const locale = useMemo((): SupportedLocale | null => {
+    try {
+      if (!href) {
+        return null;
+      }
+
+      const regExp = new RegExp(`^/(${SUPPORTED_LOCALES.join('|')})(/.*)?$`, 'i');
+      const locale = new URL(href).pathname.match(regExp)?.[1];
+      if (!locale) {
+        return null;
+      }
+
+      return SUPPORTED_LOCALES.find((it) => it.toLowerCase() === locale.toLowerCase()) ?? null;
+    } catch (e) {
+      return null;
+    }
+  }, [href]);
+
   const items = useMemo((): typeof itemsParam => {
     if (!itemsParam) return null;
     if (!locale) return itemsParam;
@@ -74,6 +89,36 @@ export const Component = ({
       return it;
     });
   }, [itemsParam, locale]);
+
+  const currentItem = useMemo(() => {
+    if (!href) return null;
+    if (!items) return null;
+    const results = items
+      .filter((it) => {
+        if (!it.href) return false;
+        return href.toLowerCase().startsWith(it.href.toLowerCase());
+      })
+      .sort((a, b) => b.href!.length - a.href!.length);
+
+    return results[0] ?? null;
+  }, [href, items]);
+
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    const body = document.querySelector('body');
+    if (!body) return;
+
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach(() => {
+        setHref(document.location.href);
+      });
+    });
+
+    observer.observe(body, { childList: true, subtree: true });
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <HeaderContainer>
@@ -99,6 +144,7 @@ export const Component = ({
                 target={it.target}
                 onClick={it.onClick}
                 data-testid={`sb.header.items.${it.key}`}
+                isActive={!!currentItem && currentItem.href === it.href}
               >
                 {it.render}
               </MenuItem>

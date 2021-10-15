@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { rem, transitions } from 'polished';
 
 import { bigEnough } from '../../../modules/styles';
@@ -15,7 +15,11 @@ export const MenuItemContainer = styled.li`
   }
 `;
 
-export const MenuItemAnchor = styled.a`
+const activeAnchor = css`
+  color: ${({ theme }) => theme.pulsar.color.primary.normal};
+`;
+
+export const MenuItemAnchor = styled.a<{ isActive: boolean }>`
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -31,6 +35,7 @@ export const MenuItemAnchor = styled.a`
   color: inherit;
   cursor: pointer;
   ${({ theme }) => transitions(['background'], theme.pulsar.duration.normal)};
+  ${({ isActive }) => isActive && activeAnchor};
 
   :hover {
     background: ${({ theme }) => theme.pulsar.color.bg.hover};

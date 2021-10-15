@@ -1,2 +1,3 @@
 export { LocaleSwitcher } from './component';
-export { SupportedLocale, SUPPORTED_LOCALES } from './getLanguageName';
+export { SUPPORTED_LOCALES } from './getLanguageName';
+export type { SupportedLocale } from './getLanguageName';
