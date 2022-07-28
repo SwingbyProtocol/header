@@ -33,6 +33,7 @@ export const DEFAULT_ITEMS: Props['items'] = [
   { render: 'Farm', key: 'farm', href: 'https://farm.swingby.network' },
   { render: 'Metanodes', key: 'metanodes', href: 'https://skybridge.info/metanodes' },
   { render: 'ERC20 Bridge', key: 'erc20-bridge', href: 'https://bridge.swingby.network' },
+  { render: 'DAO', key: 'dao', href: 'https://dao.swingby.network/' },
 ];
 
 export const Component = ({
@@ -92,6 +93,10 @@ export const Component = ({
 
       if (it === DEFAULT_ITEMS[4]) {
         return { ...it, href: `https://bridge.swingby.network/${locale}` };
+      }
+
+      if (it === DEFAULT_ITEMS[5]) {
+        return { ...it, href: `https://dao.swingby.network/${locale}` };
       }
 
       return it;
