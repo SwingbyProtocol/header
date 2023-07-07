@@ -29,8 +29,12 @@ const Common = () => (
         </>
       }
       items={[
-        { key: 'stake', href: 'https://skybridge.info/pool', render: 'Stake and Earn BTC' },
-        { key: 'metanodes', href: 'https://skybridge.info/metanodes', render: 'Metanodes' },
+        {
+          key: 'stake',
+          href: 'https://app.swingby.network/liquidity',
+          render: 'Stake and Earn BTC',
+        },
+        { key: 'metanodes', href: 'https://app.swingby.network/metanodes', render: 'Metanodes' },
         { key: 'telegram-and-explorer', render: <FancyButtons items={['telegram']} /> },
       ]}
     />

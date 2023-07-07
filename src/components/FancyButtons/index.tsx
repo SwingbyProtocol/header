@@ -17,7 +17,7 @@ export const FancyButtons = ({ items = ['telegram'] }: Props) => {
                 variant="tertiary"
                 size="city"
                 shape="fit"
-                href="https://skybridge.info"
+                href="https://app.swingby.network"
               >
                 Explorer
               </StyledExplorerButton>
