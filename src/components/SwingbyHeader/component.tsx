@@ -28,11 +28,10 @@ type Props = {
 
 const TOGGLE_ID = 'sb-header-menu-toggle';
 export const DEFAULT_ITEMS: Props['items'] = [
-  { render: 'Explorer', key: 'explorer', href: 'https://app.swingby.network/explorer' },
+  { render: 'Swap', key: 'swap', href: 'https://app.swingby.network' },
   { render: 'Liquidity', key: 'liquidity', href: 'https://app.swingby.network/liquidity' },
-  { render: 'Farm', key: 'farm', href: 'https://farm.swingby.network' },
+  { render: 'Explorer', key: 'explorer', href: 'https://app.swingby.network/explorer' },
   { render: 'Metanodes', key: 'metanodes', href: 'https://app.swingby.network/metanodes' },
-  { render: 'ERC20 Bridge', key: 'erc20-bridge', href: 'https://bridge.swingby.network' },
   { render: 'DAO', key: 'dao', href: 'https://dao.swingby.network/' },
 ];
 
@@ -76,15 +75,15 @@ export const Component = ({
 
     return itemsParam.map((it) => {
       if (it === DEFAULT_ITEMS[0]) {
-        return { ...it, href: `https://app.swingby.network/${locale}` };
+        return { ...it, href: `https://app.swingby.network/${locale}/swap` };
       }
 
       if (it === DEFAULT_ITEMS[1]) {
-        return { ...it, href: `https://app.swingby.network/${locale}/pool` };
+        return { ...it, href: `https://app.swingby.network/${locale}/liquidity` };
       }
 
       if (it === DEFAULT_ITEMS[2]) {
-        return { ...it, href: `https://farm.swingby.network/${locale}` };
+        return { ...it, href: `https://farm.swingby.network/${locale}/explorer` };
       }
 
       if (it === DEFAULT_ITEMS[3]) {
@@ -92,10 +91,6 @@ export const Component = ({
       }
 
       if (it === DEFAULT_ITEMS[4]) {
-        return { ...it, href: `https://bridge.swingby.network/${locale}` };
-      }
-
-      if (it === DEFAULT_ITEMS[5]) {
         return { ...it, href: `https://dao.swingby.network/${locale}` };
       }
 
