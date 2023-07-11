@@ -75,7 +75,7 @@ export const Component = ({
 
     return itemsParam.map((it) => {
       if (it === DEFAULT_ITEMS[0]) {
-        return { ...it, href: `https://app.swingby.network/${locale}/swap` };
+        return { ...it, href: `https://app.swingby.network/${locale}` };
       }
 
       if (it === DEFAULT_ITEMS[1]) {
@@ -83,7 +83,7 @@ export const Component = ({
       }
 
       if (it === DEFAULT_ITEMS[2]) {
-        return { ...it, href: `https://farm.swingby.network/${locale}/explorer` };
+        return { ...it, href: `https://app.swingby.network/${locale}/explorer` };
       }
 
       if (it === DEFAULT_ITEMS[3]) {
